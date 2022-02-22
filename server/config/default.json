@@ -1,0 +1,5 @@
+{
+    "serverPort": "5000",
+    "jwtSecretKey": "123456789",
+    "DB_URL": "mongodb+srv://root:root@cluster0.eunhh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+}
