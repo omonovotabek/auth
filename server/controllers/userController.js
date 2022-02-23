@@ -2,7 +2,7 @@ const {User, validateSignIn, validateSignUp} = require('../models/UserModel')
 const bcrypt = require('bcrypt')
 const config = require('config')
 const jwt = require('jsonwebtoken')
-
+const errorHandler = require('../utils/errorHandler')
 
 signUp = async (req, res) => {
   try {
@@ -19,7 +19,7 @@ signUp = async (req, res) => {
       user = await User.create({name, email, password: hashPassword})
       res.send(user)
   } catch (e) {
-      console.log(e);
+      errorHandler(res, e)
   }
 }
 
@@ -38,7 +38,7 @@ signIn = async (req, res) => {
        const token = jwt.sign(
            {userId:user.id}, 
            config.get('jwtSecretKey'),
-           {expiresIn: '1h'}
+           {expiresIn: 60*60}
            )
            
        res.header('x-auth-token', token).send(true)

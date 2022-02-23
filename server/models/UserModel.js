@@ -23,7 +23,7 @@ const userSchema = new Schema({
       }
 })
 
-const User = model('User', userSchema)
+const User = model('users', userSchema)
 
 function validateSignUp (candidat) {
     const schema = Joi.object ({
