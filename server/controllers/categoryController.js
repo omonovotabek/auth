@@ -32,9 +32,10 @@ remove = async (req, res) => {
 
 create = async (req, res) => {
     try {
+        // console.log(req.file)
       const category = await Category.create({
           name: req.body.name,
-          user: req.body.user,
+          user: req.user.userId,
           imageSrc: req.file ? req.file.path : ''
       })
       res.status(201).json(category)

@@ -7,10 +7,10 @@ const positionRouter = require('./routers/positionRouter')
 const app = express()
     
       // thrid-party middleware //
-app.use(require('morgan')('dev')) // terminal => POST /api/user/signUp 200 454.055 ms - 159
 app.use(express.json())
-// app.use(require('cors'))
+app.use('/uploads', express.static('uploads'))
 
+app.use(require('morgan')('dev')) 
       // route middleware //
 app.use('/api/user', userRouter)
 app.use('/api/analytics', analyticsRouter)
@@ -19,3 +19,7 @@ app.use('/api/order', orderRouter)
 app.use('/api/position', positionRouter)
 
 module.exports = app
+
+
+
+// app.use(require('morgan')('dev')) // terminal => POST /api/user/signUp 200 454.055 ms - 159
