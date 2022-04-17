@@ -1,9 +1,9 @@
 const express = require('express')
-const userRouter = require('./routers/userRouter')
-const analyticsRouter = require('./routers/analyticsRouter')
-const categoryRouter = require('./routers/categoryRouter')
-const orderRouter = require('./routers/orderRouter')
-const positionRouter = require('./routers/positionRouter')
+const userRouter = require('./routes/userRouter')
+const analyticsRouter = require('./routes/analyticsRouter')
+const categoryRouter = require('./routes/categoryRouter')
+const orderRouter = require('./routes/orderRouter')
+const positionRouter = require('./routes/positionRouter')
 const app = express()
     
       // thrid-party middleware //
