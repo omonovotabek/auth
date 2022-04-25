@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const config = require('config')
+ 
 
 module.exports.auth = (req, res, next) => {
     const token = req.header('x-auth-token')
@@ -7,7 +7,7 @@ module.exports.auth = (req, res, next) => {
        return res.status(401).send('Token bo\'lmaganligi sababli murojat rad etildi')
 
      try {
-         const decoded = jwt.verify(token, config.get('jwtSecretKey'))
+         const decoded = jwt.verify(token, process.env.jwtSecretKey)
          req.user = decoded
          next()
      } catch (e) {

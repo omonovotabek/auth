@@ -1,67 +1,62 @@
 const Category = require('../models/CategoryModel')
 const Position = require('../models/PositionModel')
-const errorHandler = require('../utils/errorHandler')
 
-getAll = async (req, res) => {
-  try {
-      const categories = await Category.find({user: req.user.id})
+class CategoryController {
+  async getAll(req, res) {
+    try {
+      const categories = await Category.find({ user: req.user.id })
       res.status(200).json(categories)
-  } catch (e) {
-      errorHandler(res, e)
+    } catch (e) {
+      console.log(res, e)
+    }
   }
-}
 
-getById = async (req, res) => {
+  async getById(req, res) {
     try {
-        const categorie = await Category.findById({_id: req.params.id})
-        res.status(200).json(categorie)
+      const categorie = await Category.findById({ _id: req.params.id })
+      res.status(200).json(categorie)
     } catch (e) {
-        errorHandler(res, e)
+      console.log(res, e)
     }
-}
+  }
 
-remove = async (req, res) => {
+  async remove(req, res) {
     try {
-         await Category.remove({_id: req.params.id})
-         await Position.remove({category: req.params.id}) 
-        res.status(200).json({message: 'Категория удалена'})
+      await Category.remove({ _id: req.params.id })
+      await Position.remove({ category: req.params.id })
+      res.status(200).json({ message: 'Категория удалена' })
     } catch (e) {
-        errorHandler(res, e)
+      console.log(res, e)
     }
-}
+  }
 
-create = async (req, res) => {
+  async create(req, res) {
     try {
-        // console.log(req.file)
+      // console.log(req.file)
       const category = await Category.create({
-          name: req.body.name,
-          user: req.user.userId,
-          imageSrc: req.file ? req.file.path : ''
+        name: req.body.name,
+        user: req.user.userId,
+        imageSrc: req.file ? req.file.path : ''
       })
       res.status(201).json(category)
     } catch (e) {
-        errorHandler(res, e)
+      console.log(res, e)
     }
-}
+  }
 
-update = async (req, res) => {
+  async update(req, res) {
     try {
       const updated = {}
       const category = await Category.findOneAndUpdate(
-          {_id: req.params.id},
-          {$set:updated},
-          {new: true}
+        { _id: req.params.id },
+        { $set: updated },
+        { new: true }
       )
       res.status(200).json(category)
     } catch (e) {
-        errorHandler(res, e)
+      console.log(res, e)
     }
+  }
 }
 
-module.exports = {
-    getAll,
-    getById,
-    remove,
-    create,
-    update
-}
+module.exports = new CategoryController()

@@ -1,59 +1,55 @@
 const Position = require('../models/PositionModel')
-const errorHandler = require('../utils/errorHandler')
 
-getByCategoryId = async (req, res) => {
-  try {
+class PositionController {
+  async getByCategoryId(req, res) {
+    try {
       const positions = await Position.find({
-         category: req.params.categoryId,
-         user:req.user.id 
+        category: req.params.categoryId,
+        user: req.user.id
       })
       res.status(200).json(positions)
-  } catch (e) {
-      errorHandler(res, e)
+    } catch (e) {
+      console.log(res, e)
+    }
   }
-}
 
-create = async (req, res) => {
-  try {
+  async create(req, res) {
+    try {
       const position = await Position.create({
-          name: req.body.name,
-          cost: req.body.cost,
-          category: req.body.category,
-          user: req.user.id
+        name: req.body.name,
+        cost: req.body.cost,
+        category: req.body.category,
+        user: req.user.id
       })
       res.status(201).json(position)
-  } catch (e) {
-      errorHandler(res, e)      
+    } catch (e) {
+      console.log(res, e)
+    }
   }
-}
 
-update = async (req, res) => {
-  try {
+  async update(req, res) {
+    try {
       const positon = await Position.findOneAndUpdate(
-        {_id:req.params.id},
-        {$set: req.body},
-        {new: true}
-        )
+        { _id: req.params.id },
+        { $set: req.body },
+        { new: true }
+      )
       res.status(200).json(positon)
-  } catch (e) {
-      errorHandler(res, e)
+    } catch (e) {
+      console.log(res, e)
+    }
+  }
+
+  async remove(req, res) {
+    try {
+      await Position.remove({ _id: req.params.id })
+      res.status(200).json({
+        message: 'Позиция была удалена.'
+      })
+    } catch (e) {
+      console.log(res, e)
+    }
   }
 }
 
-remove = async (req, res) => {
-   try {
-       await Position.remove({_id: req.params.id})
-       res.status(200).json({
-           message: 'Позиция была удалена.'
-       })
-   } catch (e) {
-       errorHandler(res, e)
-   }
-}
-
-module.exports = {
-    getByCategoryId,
-    create,
-    update,
-    remove
-}
+module.exports = new PositionController()

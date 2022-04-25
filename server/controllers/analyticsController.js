@@ -1,14 +1,13 @@
 const Analytics = require('../models/AnalyticsModel')
-const errorHandler = require('../utils/errorHandler')
 
-getOverview = (req, res) => {
+class AnalyticsController {
+  getOverview(req, res) {
 
+  }
+
+  getAnalytics(req, res) {
+
+  }
 }
 
-getAnalytics = (req, res) => {
-
-}
-
-module.exports = {
-    getOverview, getAnalytics
-}
+module.exports = new AnalyticsController()

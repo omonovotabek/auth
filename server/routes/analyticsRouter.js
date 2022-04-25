@@ -1,8 +1,8 @@
 const {Router} = require('express')
-const controller = require('../controllers/analyticsController')
+const {getAnalytics, getOverview} = require('../controllers/analyticsController')
 const router = Router()
 
-router.get('/overview', controller.getOverview)
-router.get('/analytics', controller.getAnalytics)
+router.get('/overview', getOverview)
+router.get('/analytics', getAnalytics)
 
 module.exports = router

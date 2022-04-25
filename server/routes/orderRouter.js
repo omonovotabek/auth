@@ -1,9 +1,9 @@
 const {Router} = require('express')
-const controller = require('../controllers/orderController')
+const {getAll, create} = require('../controllers/orderController')
 const {auth} = require('../middleware/auth')
 const router = Router()
 
-router.get('/', auth, controller.getAll)
-router.get('/', auth, controller.create)
+router.get('/', auth, getAll)
+router.get('/', auth, create)
 
 module.exports = router
