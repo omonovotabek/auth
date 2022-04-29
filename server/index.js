@@ -2,8 +2,12 @@ require("dotenv").config();
 
 // Подключаем бэкенд на Express.
 const express = require("express");
+const cors = require('cors')
+const morgan = require('morgan')
 const app = express();
 app.use(express.json()); 
+app.use(cors())
+app.use(morgan('dev'))
 
 // Подключаем Mongoose и делаем коннект к базе данных.
 // Прописываем стандартные настройки Mongoose.

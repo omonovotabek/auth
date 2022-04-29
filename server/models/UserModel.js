@@ -1,5 +1,6 @@
 const {Schema, model} = require('mongoose')
 const Joi = require('joi')
+const jwt = require('jsonwebtoken')
 
 const userSchema = new Schema({
     name: {
@@ -22,8 +23,17 @@ const userSchema = new Schema({
         maxlength: 1024
       }
 })
+userSchema.methods.generateAuthToken = function() {
+    const token = jwt.sign(
+        { userId: this._id },
+        process.env.jwtSecretKey,
+        { expiresIn: '1h' }
+      )
+      return token
+}
 
 const User = model('users', userSchema)
+
 
 function validateSignUp (candidat) {
     const schema = Joi.object ({

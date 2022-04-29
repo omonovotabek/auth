@@ -28,6 +28,8 @@ export default {
   ],
 
   plugins: [
+    '@/plugins/axios',
+    '@/plugins/vee-validate'
   ],
 
   components: true,
@@ -45,5 +47,6 @@ export default {
   },
 
   build: {
+    transpile: ["vee-validate/dist/rules"],
   }
 }

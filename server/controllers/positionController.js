@@ -5,11 +5,11 @@ class PositionController {
     try {
       const positions = await Position.find({
         category: req.params.categoryId,
-        user: req.user.id
+        user: req.user.userId
       })
       res.status(200).json(positions)
     } catch (e) {
-      console.log(res, e)
+      res.status(500).json('Server error 500')
     }
   }
 
@@ -19,11 +19,11 @@ class PositionController {
         name: req.body.name,
         cost: req.body.cost,
         category: req.body.category,
-        user: req.user.id
+        user: req.user.userId
       })
       res.status(201).json(position)
     } catch (e) {
-      console.log(res, e)
+      res.status(500).json('Server error 500')
     }
   }
 
@@ -36,7 +36,7 @@ class PositionController {
       )
       res.status(200).json(positon)
     } catch (e) {
-      console.log(res, e)
+      res.status(500).json('Server error 500')
     }
   }
 
@@ -47,7 +47,7 @@ class PositionController {
         message: 'Позиция была удалена.'
       })
     } catch (e) {
-      console.log(res, e)
+      res.status(500).json('Server error 500')
     }
   }
 }

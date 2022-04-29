@@ -17,7 +17,7 @@ class OrderController {
         if (!query.date) {
           query.date = {}
         }
-        query.date['lte'] = req.query.end
+        query.date['$lte'] = req.query.end
       }
       if (req.query.order) {
         query.order = +req.query.order
@@ -30,7 +30,7 @@ class OrderController {
 
       res.status(200).json(orders)
     } catch (e) {
-      console.log(res, e)
+      res.status(500).json('Server error 500')
     }
   }
 
@@ -48,7 +48,7 @@ class OrderController {
       })
       res.status(201).json(order)
     } catch (e) {
-      console.log(res, e)
+      res.status(500).json('Server error 500')
     }
   }
 }
