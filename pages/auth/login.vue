@@ -1,11 +1,5 @@
 <template>
   <div>
-    <b-alert 
-    class="sticky" 
-    :variant="alert" 
-    :show="Boolean(message)"
-    >{{ message }}</b-alert
-    >
     <ValidationObserver ref="form" v-slot="{ invalid }">
       <form @submit.prevent="onSubmit">
         <div class="card">
@@ -70,7 +64,6 @@ export default {
   layout: "auth",
   data() {
     return {
-      alert:"",
       setErrorEmail: "",
       setErrorPassword: "",
       submitError: "",
@@ -80,31 +73,7 @@ export default {
         email: "",
         password: "",
       },
-      message: "",
     };
-  },
-  async mounted() {
-    const { message } = this.$route.query;
-    const data = await this.$store.getters["auth/dataObj"];
-    if (data.message){
-      this.message = data.message;
-      this.alert = "success"
-    } 
-    else {
-      this.message = "Для начала войдите в систему";
-      this.alert = "info"
-    }
-    if (message === "logout"){
-      this.message = "Вы успешно вышли из систему";
-      this.alert = "success"
-    } 
-    if (message === "session"){
-      this.message = "Время сессии истекло, пожалуйста зайдите заного";
-      this.alert = "warning"
-    }      
-    setTimeout(() => {
-      this.message = "";
-    }, 2000);
   },
   methods: {
     emailCheck() {
@@ -146,10 +115,5 @@ export default {
 </script>
 
 <style scoped>
-.sticky {
-  z-index: 10;
-  width: 30%;
-  position: fixed;
-  top: 50px;
-}
+
 </style>

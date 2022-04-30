@@ -22,7 +22,7 @@ export default {
     };
   },
 
-  async mounted() {
+   created() {
     const path = this.$route.path;
     const error = this.$route.query;
     if (path === "/serverError") {
@@ -31,12 +31,14 @@ export default {
     else if (error) {
       this.badRequest = "badRequest";
       this.error = error.message
+      this.$router.push('/badRequest')
     }
      else if (path === "/") {
       this.networkError = "Network Error Please check your internet connection.";
     } else {
       this.notPage = "Not Page";
     }
+  
   },
 };
 </script>

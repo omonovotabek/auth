@@ -101,7 +101,8 @@ export default {
         this.submitError = data.message;
         this.submitFormEmail = this.form.email;
       }
-      if (data.type === "created") this.$router.push("/auth/login");
+      if (data.type === "created")
+        this.$router.push("/auth/login?message=created");
     },
   },
 };
